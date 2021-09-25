@@ -1,0 +1,12 @@
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\KomodoInsurance_Console.exe.config
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\KomodoInsurance_Console.exe
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\KomodoInsurance_Console.pdb
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\DeveloperRepo.dll
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\DevTeamRepo.dll
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\DeveloperRepo.pdb
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\bin\Debug\DevTeamRepo.pdb
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\obj\Debug\1_KomodoInsurance_Console.csproj.AssemblyReference.cache
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\obj\Debug\1_KomodoInsurance_Console.csproj.CoreCompileInputs.cache
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\obj\Debug\1_KomodoInsurance_Console.csproj.CopyComplete
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\obj\Debug\KomodoInsurance_Console.exe
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\KomodoInsurance_Console\obj\Debug\KomodoInsurance_Console.pdb

@@ -1,0 +1,9 @@
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\bin\Debug\DevTeamRepo.dll
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\bin\Debug\DevTeamRepo.pdb
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\bin\Debug\DeveloperRepo.dll
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\bin\Debug\DeveloperRepo.pdb
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\obj\Debug\DevTeamRepo.csproj.AssemblyReference.cache
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\obj\Debug\DevTeamRepo.csproj.CoreCompileInputs.cache
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\obj\Debug\DevTeamRepo.csproj.CopyComplete
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\obj\Debug\DevTeamRepo.dll
+C:\Users\Lauren\Documents\Eleven Fifty Academy\ElevenFIftyProjects\DotNetProjects\Komodo_Insurance_Management_App\DevTeamRepo\obj\Debug\DevTeamRepo.pdb
