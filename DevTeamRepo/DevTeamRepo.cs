@@ -33,7 +33,7 @@ namespace DevTeamRepository
             //Update the Team
             if (existingTeam != null)
             {
-                existingTeam.ListOfDevelopersOnTeam = newDevTeam.ListOfDevelopersOnTeam; //Question -- is this right way to do this?
+                existingTeam.ListOfDevelopersOnTeam = newDevTeam.ListOfDevelopersOnTeam; 
                 existingTeam.TeamName = newDevTeam.TeamName;
                 return true;
             }

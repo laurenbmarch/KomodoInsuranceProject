@@ -33,16 +33,18 @@ namespace KomodoInsurance_Console
                     "\t3. Find Developer By ID Number\n" +
                     "\t4. Update Existing Developer\n" +
                     "\t5. Delete Existing Developer\n" +
-                    "\t6. View Developers Who Need Pluralsight Access\n\n" +
+                    "\t6. Add a Developer to Team\n" +
+                    "\t7. Remove a Developer from a Team\n" +
+                    "\t8. View Developers Who Need Pluralsight Access\n\n" +
                     
                     "Development Teams:\n" +
-                    "\t7. Create New Development Team\n" +
-                    "\t8. View All Development Teams\n" +
-                    "\t9. Find Development Team By Team ID Number\n" +
-                    "\t10. Update Existing Development Team\n"+   
-                    "\t11. Delete Existing Development Team\n\n" +
+                    "\t9. Create New Development Team\n" +
+                    "\t10. View All Development Teams\n" +
+                    "\t11. Find Development Team By Team ID Number\n" +
+                    "\t12. Update Existing Development Team\n"+   
+                    "\t13. Delete Existing Development Team\n\n" +
                     
-                    "12. Exit");
+                    "14. Exit");
 
                 string userInput = Console.ReadLine();
 
@@ -69,33 +71,41 @@ namespace KomodoInsurance_Console
                         RemoveDeveloperFromList();
                         break;
                     case "6":
+                        //Add a developer to a team
+                        AddADeveloperToADevTeam();
+                        break;
+                    case "7":
+                        //Remove a developer from a team
+                        RemoveADeveloperFromDevTeam();
+                        break;
+                    case "8":
                         //Display list of those who need Pluralsight
                         DisplayDevelopersWhoNeedPluralsight();
                         break;
-                    case "7":
+                    case "9":
                         //Create New Development Team
                         AddTeamToList();
                         break;
-                    case "8":
+                    case "10":
                         //View All Deveopment Teams by Team ID Number
                         DisplayListofDevTeams();
                         break;
-                    case "9":
+                    case "11":
                         //Find Development Team By ID Number
                         DisplayTeamByTeamIdNumber();
                         break;
                     
-                    case "10":
+                    case "12":
                         //Update Existing Development Team
                         UpdateExistingTeams();
                             break;
                     
-                    case "11":
+                    case "13":
                         //Delete Existing Development Team
                         RemoveTeamFromList();
                         break;
                     
-                    case "12":
+                    case "14":
                         Console.WriteLine("Exiting Now");
                         keepRunning = false;
                         break;
@@ -152,6 +162,7 @@ namespace KomodoInsurance_Console
             _devTeamRepo.AddTeamToList(newDevTeam);
         }
 
+        //Add Existing Developers to a Team
         private List<Developer> AddDevelopersToDevTeam()
         {
             List<Developer> listOfDevelopersToBeAdded = new List<Developer>();
@@ -172,7 +183,36 @@ namespace KomodoInsurance_Console
                 }
             }
             return listOfDevelopersToBeAdded;
+        }
 
+        //Add New Developers to a Team
+        public List<Developer> AddADeveloperToADevTeam()
+        {
+            Console.Clear();
+            List<Developer> listOfDevelopersToBeAdded = AddDevelopersToDevTeam();
+            DisplayListofDevTeams();
+            Console.WriteLine("Enter the Team ID for the developer team that you would like to add:");
+            int teamId = int.Parse(Console.ReadLine());
+            DevTeam devTeam = _devTeamRepo.GetTeamByTeamIdNumber(teamId);
+            foreach (var developer in listOfDevelopersToBeAdded)
+            {
+                devTeam.AddDeveloperToTeam(developer, devTeam);
+            }
+            return devTeam.GetListofDevelopersOnATeam();
+        }
+
+        //Remove a devloper from a Team
+        public void RemoveADeveloperFromDevTeam()
+        {
+            DisplayListofDevTeams();
+            Console.WriteLine("Enter the ID number of the developer that you would like to remove:");
+            int developerId = int.Parse(Console.ReadLine());
+            Developer developer = _developerRepo.GetDeveloperByIdNumber(developerId);
+            Console.WriteLine("Enter the Team ID number for the developer you would like to remove:");
+            int teamId = int.Parse(Console.ReadLine());
+            DevTeam devTeam = _devTeamRepo.GetTeamByTeamIdNumber(teamId);
+            devTeam.RemoveDeveloperFromTeam(developer, devTeam);
+  
         }
 
         //Show List of All Developers
@@ -454,13 +494,23 @@ namespace KomodoInsurance_Console
             Developer exampleDeveloperTwo = new Developer("Jones", "Alice ", false);
             Developer exampleDeveloperThree = new Developer("Gonzales", "Roberto ", true);
             Developer exampleDeveloperFour = new Developer("Graham", "William ", false);
+            Developer exampleDeveloperFive = new Developer("Martinez", "Jose", true);
 
             _developerRepo.AddDeveloperToList(exampleDeveloperOne);
             _developerRepo.AddDeveloperToList(exampleDeveloperTwo);
             _developerRepo.AddDeveloperToList(exampleDeveloperThree);
             _developerRepo.AddDeveloperToList(exampleDeveloperFour);
+            _developerRepo.AddDeveloperToList(exampleDeveloperFive);
 
-            /*DevTeam exampleDevTeamOne = new DevTeam(exampleDeveloperOne,"Software Engineering Team A");*/ // Question: I don't know how to do this
+            DevTeam exampleDevTeamOne = new DevTeam(new List<Developer>(),"Software Team A");
+            DevTeam exampleDevTeamTwo = new DevTeam(new List<Developer>(),"Software Team B");
+
+            exampleDevTeamOne.AddDeveloperToTeam(exampleDeveloperOne, exampleDevTeamOne);
+            exampleDevTeamOne.AddDeveloperToTeam(exampleDeveloperTwo, exampleDevTeamOne);
+            exampleDevTeamTwo.AddDeveloperToTeam(exampleDeveloperThree, exampleDevTeamTwo);
+            exampleDevTeamTwo.AddDeveloperToTeam(exampleDeveloperFour, exampleDevTeamTwo);
+            
+            
         }
 
     }

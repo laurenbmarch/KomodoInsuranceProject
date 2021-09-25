@@ -22,5 +22,21 @@ namespace DevTeamRepository
             TeamName = teamName;
             
         }
+
+        public void AddDeveloperToTeam (Developer developer, DevTeam devTeam)
+        {
+            devTeam.ListOfDevelopersOnTeam.Add(developer);
+        }
+
+        public void RemoveDeveloperFromTeam (Developer developer, DevTeam devTeam)
+        {
+            devTeam.ListOfDevelopersOnTeam.Remove(developer);
+        }
+
+        public List<Developer> GetListofDevelopersOnATeam()
+        {
+            return this.ListOfDevelopersOnTeam;
+        }
+
     }
 }
