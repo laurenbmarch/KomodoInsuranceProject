@@ -185,7 +185,7 @@ namespace KomodoInsurance_Console
             {
                 Console.WriteLine($"Name: {developer.FirstName}{" "}{developer.LastName}\n" +
                     $"ID Number: {developer.DevIdNumber}\n" +
-                    $"Access to Pluralsight: {developer.HasPluralsightAccess}\n");
+                    $"Access to Pluralsight: {ReturnYesOrNo(developer.HasPluralsightAccess)}\n");
             }
 
         }
@@ -200,7 +200,13 @@ namespace KomodoInsurance_Console
             {
                 Console.WriteLine($"Team Name: {developmentTeam.TeamName}\n" +
                     $"Team ID Number: {developmentTeam.TeamId}\n" +
-                    $"Developers on the Team: {developmentTeam.ListOfDevelopersOnTeam}");  //Question: How do I access this? This is not right.
+                    $"Developers on the Team: ");
+                foreach (Developer developer in developmentTeam.ListOfDevelopersOnTeam)
+                {
+                    Console.WriteLine($"\tName: {developer.FirstName}{" "}{developer.LastName}\n" +
+                        $"\tID Number: {developer.DevIdNumber}\n" +
+                        $"\tPluralsight Access: {ReturnYesOrNo(developer.HasPluralsightAccess)}\n\n");
+                }
             }
         }
 
@@ -210,20 +216,28 @@ namespace KomodoInsurance_Console
             Console.Clear();
             Console.WriteLine("Enter the ID Number of the Developer you would like to view:");
 
-            int idNumber = int.Parse(Console.ReadLine()); //Question: I need an option for if the user does not enter an integer
-
-            Developer developer = _developerRepo.GetDeveloperByIdNumber(idNumber);
-
-            if(developer != null)
+            int idNumber;
+            try
             {
-                Console.WriteLine($"Name: {developer.FirstName}{" "}{developer.LastName}\n" +
-                    $"ID Number: {developer.DevIdNumber}\n" +
-                    $"Pluralsight Access: {developer.HasPluralsightAccess}");
+                idNumber = int.Parse(Console.ReadLine()); //Question: I need an option for if the user does not enter an integer
+                Developer developer = _developerRepo.GetDeveloperByIdNumber(idNumber);
+
+                if (developer != null)
+                {
+                    Console.WriteLine($"Name: {developer.FirstName}{" "}{developer.LastName}\n" +
+                        $"ID Number: {developer.DevIdNumber}\n" +
+                        $"Pluralsight Access: {ReturnYesOrNo(developer.HasPluralsightAccess)}");
+                }
+                else
+                {
+                    Console.WriteLine("There is no Developer in the database with that ID Number.");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("There is no Developer in the database with that ID Number.");
+                Console.WriteLine("Invalid selection.");                
             }
+
         }
 
         //Show One Dev Team
@@ -232,19 +246,35 @@ namespace KomodoInsurance_Console
             Console.Clear();
             Console.WriteLine("Enter the ID Number of the Development Team you would like to access:");
 
-            int teamIdNumber = int.Parse(Console.ReadLine()); //Question: I need to have an option if user does not enter an integer
-            DevTeam devTeam = _devTeamRepo.GetTeamByTeamIdNumber(teamIdNumber);
+            int teamIdNumber;
+            try
+            {
+                teamIdNumber = int.Parse(Console.ReadLine()); 
 
-            if (devTeam != null)
-            {
-                Console.WriteLine($"Team Name: {devTeam.TeamName}\n" +
-                    $"Team ID Number: {devTeam.TeamId}\n" +
-                    $"List of Developers on the team: {devTeam.ListOfDevelopersOnTeam}"); 
+                DevTeam devTeam = _devTeamRepo.GetTeamByTeamIdNumber(teamIdNumber);
+
+                if (devTeam != null)
+                {
+                    Console.WriteLine($"Team Name: {devTeam.TeamName}\n" +
+                        $"Team ID Number: {devTeam.TeamId}\n" +
+                        $"\tList of Developers on the team:");
+                    foreach (Developer developer in devTeam.ListOfDevelopersOnTeam)
+                    {
+                        Console.WriteLine($"\tName: {developer.FirstName}{" "}{developer.LastName}\n" +
+                            $"\tID Number: {developer.DevIdNumber}\n" +
+                            $"\tPluralsight Access: {developer.HasPluralsightAccess}\n\n");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("There is no Development Team with that ID Number.");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("There is no Development Team with that ID Number.");
+                Console.WriteLine("Invalid selection.");
             }
+                   
         }
 
         //Update Individual Developer
@@ -253,40 +283,44 @@ namespace KomodoInsurance_Console
             DisplayDeveloperList();
             Console.WriteLine("Enter the ID Number of the Developer you would like to update:");
 
-            int oldDevIdNumber = int.Parse(Console.ReadLine());
-
-            Developer newDeveloper = new Developer();
-
-            Console.WriteLine("Enter the First Name of the Developer:");
-            newDeveloper.FirstName = Console.ReadLine();
-
-            Console.WriteLine("Enter the Last Name of the Developer:");
-            newDeveloper.LastName = Console.ReadLine();
-
-            //Console.WriteLine("Enter the ID Number of the Developer:");
-            //newDeveloper.DevIdNumber = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Does this Developer have access to Pluralsight? (yes/no)");
-            string accessAsString = Console.ReadLine().ToLower();
-
-            if (accessAsString == "yes")
+            int oldDevIdNumber;
+            try
             {
-                newDeveloper.HasPluralsightAccess = true;
-            }
-            else
-            {
-                newDeveloper.HasPluralsightAccess = false;
-            }
+                oldDevIdNumber = int.Parse(Console.ReadLine());
+                Developer newDeveloper = new Developer();
 
-            bool wasUpdated = _developerRepo.UpdateExistingDeveloper(oldDevIdNumber, newDeveloper);
-            if (wasUpdated)
-            {
-                Console.WriteLine("Developer successfully updated.");
+                Console.WriteLine("Enter the First Name of the Developer:");
+                newDeveloper.FirstName = Console.ReadLine();
+
+                Console.WriteLine("Enter the Last Name of the Developer:");
+                newDeveloper.LastName = Console.ReadLine();
+
+                Console.WriteLine("Does this Developer have access to Pluralsight? (yes/no)");
+                string accessAsString = Console.ReadLine().ToLower();
+
+                if (accessAsString == "yes")
+                {
+                    newDeveloper.HasPluralsightAccess = true;
+                }
+                else
+                {
+                    newDeveloper.HasPluralsightAccess = false;
+                }
+
+                bool wasUpdated = _developerRepo.UpdateExistingDeveloper(oldDevIdNumber, newDeveloper);
+                if (wasUpdated)
+                {
+                    Console.WriteLine("Developer successfully updated.");
+                }
+                else
+                {
+                    Console.WriteLine("Could not update developer.");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("Could not update developer.");
-            }
+                Console.WriteLine("Invalid selection.");
+            }   
         }
        
         //Update Dev Team
@@ -295,27 +329,33 @@ namespace KomodoInsurance_Console
             DisplayListofDevTeams();
             Console.WriteLine("Enter the ID Number of the Team you would like to update:");
 
-            int oldDevTeamIdNumber = int.Parse(Console.ReadLine());
-
-            DevTeam newDevTeam = new DevTeam();
-
-            Console.WriteLine("Enter the Team Name:");
-            newDevTeam.TeamName = Console.ReadLine();
-
-            Console.WriteLine("Enter the Team ID Number:");
-            newDevTeam.TeamId = int.Parse(Console.ReadLine());
-
-            newDevTeam.ListOfDevelopersOnTeam = AddDevelopersToDevTeam();
-
-            bool wasUpdated = _devTeamRepo.UpdateExistingTeams(oldDevTeamIdNumber, newDevTeam);
-            if (wasUpdated)
+            int oldDevTeamIdNumber;
+            try
             {
-                Console.WriteLine("The Dev Team was successfully updated.");
+                oldDevTeamIdNumber = int.Parse(Console.ReadLine());
+
+                DevTeam newDevTeam = new DevTeam();
+
+                Console.WriteLine("Enter the Team Name:");
+                newDevTeam.TeamName = Console.ReadLine();
+
+                newDevTeam.ListOfDevelopersOnTeam = AddDevelopersToDevTeam();
+
+                bool wasUpdated = _devTeamRepo.UpdateExistingTeams(oldDevTeamIdNumber, newDevTeam);
+                if (wasUpdated)
+                {
+                    Console.WriteLine("The Dev Team was successfully updated.");
+                }
+                else
+                {
+                    Console.WriteLine("Could not update the Dev Team.");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("Could not update the Dev Team.");
+                Console.WriteLine("Invalid selection.");
             }
+            
         }
 
         //Delete One Developer
@@ -323,37 +363,55 @@ namespace KomodoInsurance_Console
         {
             DisplayDeveloperList();
             Console.WriteLine("\n Enter the ID Number of the Developer you would like to remove:");
-            int devIdNumber = int.Parse(Console.ReadLine()); //Question: I need an option for if the user does not enter an integer
-
-            bool wasDeleted = _developerRepo.RemoveDeveloperFromList(devIdNumber);
-
-            if (wasDeleted)
+            int devIdNumber;
+            try
             {
-                Console.WriteLine("The Developer was successfully removed from the system.");
+                devIdNumber = int.Parse(Console.ReadLine());
+
+                bool wasDeleted = _developerRepo.RemoveDeveloperFromList(devIdNumber);
+
+                if (wasDeleted)
+                {
+                    Console.WriteLine("The Developer was successfully removed from the system.");
+                }
+                else
+                {
+                    Console.WriteLine("The Developer could not be removed from the system.");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("The Developer could not be removed from the system.");
+                Console.WriteLine("Invalid selection.");
             }
+           
         }
 
         //Delete a Whole Dev Team
         private void RemoveTeamFromList()
         {
             DisplayListofDevTeams();
-            Console.WriteLine("\n Enter the Team ID Number that you would like to remove:");
-            int devTeamIdNumber = int.Parse(Console.ReadLine()); //Question: I need an option for if the user does not enter an integer
+            Console.WriteLine("\nEnter the Team ID Number that you would like to remove:");
+            int devTeamIdNumber;
 
-            bool wasDeleted = _devTeamRepo.RemoveTeamFromList(devTeamIdNumber);
+            try
+            {
+                devTeamIdNumber = int.Parse(Console.ReadLine());
+                bool wasDeleted = _devTeamRepo.RemoveTeamFromList(devTeamIdNumber);
 
-            if (wasDeleted)
-            {
-                Console.WriteLine("The Development Team was successfully removed from the system.");
+                if (wasDeleted)
+                {
+                    Console.WriteLine("The Development Team was successfully removed from the system.");
+                }
+                else
+                {
+                    Console.WriteLine("The Development Team could not be deleted from the system.");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("The Development Team could not be deleted from the system.");
+                Console.WriteLine("Invalid selection.");
             }
+            
         }
 
         //See List of Employees Who Need a Pluralsight License
@@ -374,6 +432,19 @@ namespace KomodoInsurance_Console
             }
             
 
+        }
+
+        // Method for displaying yes/no instead of true/false
+        public string ReturnYesOrNo(bool value)
+        {
+            if (value == true)
+            {
+                return "yes";
+            }
+            else
+            {
+                return "no";
+            }
         }
 
         //Seed Method for Individual 

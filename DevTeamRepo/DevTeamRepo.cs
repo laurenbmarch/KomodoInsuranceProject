@@ -35,7 +35,6 @@ namespace DevTeamRepository
             {
                 existingTeam.ListOfDevelopersOnTeam = newDevTeam.ListOfDevelopersOnTeam; //Question -- is this right way to do this?
                 existingTeam.TeamName = newDevTeam.TeamName;
-                existingTeam.TeamId = newDevTeam.TeamId;
                 return true;
             }
             else
